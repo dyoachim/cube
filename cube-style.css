@@ -1,0 +1,62 @@
+/*3d modeling*/
+.renderContainer {
+    margin: 180px;
+    -webkit-perspective: 800;
+    -webkit-perspective-origin: 50% -50%;
+}
+.origin {
+    position: relative;
+    margin: 0 auto;
+    -webkit-transition: -webkit-transform 2s;
+}
+
+.fullOrigin {
+    height: 40px;
+    width: 40px;
+}
+
+.origin, .C1, .face,.cubed {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 2s;
+
+}
+
+/* faces */
+    .face {
+        position: absolute;
+        background-color: rgba(50, 50, 50, 0.7);
+        width: 80px;
+        height: 80px;
+    }
+
+    .red { background-color: rgba(99,50,50,0.7);}
+    .green { background-color: rgba(50,99,50,0.7);}
+    .blue { background-color: rgba(50,50,99,0.7);}
+    .yellow { background-color: rgba(200,200,50,0.7);}
+    .white { background-color: rgba(240,240,240,0.7);}
+    .orange{ background-color: rgba(255,165,0,0.7);}
+
+
+
+/* draw rectangle */
+    .one {-webkit-transform: rotateX(90deg) translateZ(40px);}
+    .two {-webkit-transform: translateZ(-40px);}
+    .three {-webkit-transform: rotateY(90deg) translateZ(-40px);}
+    .four {-webkit-transform: translateZ(40px);}
+    .five {-webkit-transform: rotateY(90deg) translateZ(40px);}
+    .six {-webkit-transform: rotateX(90deg) translateZ(-40px);}
+
+    .container .two {-webkit-transform: translate3d(0,40px,-40px);}
+    .container .six {-webkit-transform: rotateX(90deg) translateZ(-80px);}
+    .container {-webkit-transform: translate3d(0,40px,80px) rotateX(180deg);}
+
+
+    .RY,.RB,.RW,.RG,.BO,.GO,.OW,.OY,.BY,.BW,.GY,.GW {-webkit-transform-origin: 100% 50% 80px;}
+
+
+    .yellowFace {-webkit-transform: translate3d(0,-80px,-40px) rotateX(90deg);}   
+    .orangeFace {-webkit-transform: translateZ(-120px);}   
+    .blueFace {-webkit-transform: translate3d(-100px,0,-20px) rotateY(-90deg);}   
+    .whiteFace {-webkit-transform: translate3d(0,160px,-40px) rotateX(90deg);}   
+    .greenFace {-webkit-transform: translate3d(140px,0,-20px) rotateY(-90deg);}   
+    .redFace {-webkit-transform: translateZ(120px);}
