@@ -1,5 +1,4 @@
-
-var xAngle = 0, yAngle = 0, angle =0, held ="", face="";
+var xAngle = 0, yAngle = 0, angle =0;
 var cHold = [0,0,0,0,0,0];
 var redHold =[['.RY','Z',0,0,0],['.RB','Z',0,0,90],['.RG','Z',0,0,-90],['.RW','Z',0,0,180]];
 var yelHold =[['.OY','Y',0,180,0],['.BY','Y',0,90,0],['.GY','Y',0,-90,0],['.RY','Y',0,0,0]];
@@ -17,114 +16,20 @@ document.addEventListener('keydown', function(e)
     case 39: yAngle += 90; break; //right
     case 40: xAngle -= 90; break; //down
 
-    case 82: //r
-      rotateFace(redHold,-90, cHold[0]+=90);
-
-      held = yelHold[3][1].slice(0);
-      yelHold[3] = redHold[0].slice(0);
-      yelHold[3][1] = blueHold[2][1].slice(0);
-
-      blueHold[2] = redHold[1].slice(0);
-      blueHold[2][1] = whiHold[0][1].slice(0);
-
-      whiHold[0] = redHold[3].slice(0);
-      whiHold[0][1] = greHold[1][1].slice(0);
-
-      greHold[1] = redHold[2].slice(0);
-      greHold[1][1] = held;
-      break;
-
-    case 66: //b
-      rotateFace(blueHold,-90, cHold[1]+=90);
-
-      held = redHold[1][1].slice(0);
-      redHold[1] = blueHold[2].slice(0);
-      redHold[1][1] = yelHold[1][1].slice(0);
-
-      yelHold[1] = blueHold[0].slice(0);
-      yelHold[1][1] = oraHold[2][1].slice(0);
-
-      oraHold[2] = blueHold[1].slice(0);
-      oraHold[2][1] = whiHold[1][1].slice(0);
-
-      whiHold[1] = blueHold[3].slice(0);
-      whiHold[1][1] = held;
-      break;
-
-    case 89: //y
-      rotateFace(yelHold,90, cHold[2]+=90);
-
-      held  = redHold[0][1].slice(0);
-      redHold[0] = yelHold[3].slice(0);
-      redHold[0][1] = greHold[0][1].slice(0);
-
-      greHold[0] = yelHold[2].slice(0);
-      greHold[0][1] = oraHold[0][1].slice(0);
-
-      oraHold[0] = yelHold[0].slice(0);
-      oraHold[0][1] = blueHold[0][1].slice(0);
-
-      blueHold[0] = yelHold[1].slice(0);
-      blueHold[0][1] = held;
-      break;
-      
-    case 71: //g
-      rotateFace(greHold,90, cHold[3]-=90);
-
-      held = redHold[2][1].slice(0);
-      redHold[2] = greHold[1].slice(0);
-      redHold[2][1] = whiHold[2][1].slice(0);
-
-      whiHold[2] = greHold[3].slice(0);
-      whiHold[2][1] = oraHold[1][1].slice(0);
-
-      oraHold[1] = greHold[2].slice(0);
-      oraHold[1][1] = yelHold[2][1].slice(0);
-
-      yelHold[2] = greHold[0].slice(0);
-      yelHold[2][1] = held;
-      break;
-
-    case 87: //w
-      rotateFace(whiHold,-90, cHold[4] -=90);
-
-      held = redHold[3][1].slice(0);
-      redHold[3] = whiHold[0].slice(0);
-      redHold[3][1] = blueHold[3][1].slice(0);
-
-      blueHold[3] = whiHold[1].slice(0);
-      blueHold[3][1] = oraHold[3][1].slice(0);
-
-      oraHold[3] = whiHold[3].slice(0);
-      oraHold[3][1] = greHold[3][1].slice(0);
-
-      greHold[3] = whiHold[2].slice(0);
-      greHold[3][1] = held;
-      break;
-
-    case 79: //o
-      rotateFace(oraHold,-90,cHold[5] -= 90);
-
-      held = yelHold[0][1].slice(0);
-      yelHold[0] = oraHold[0].slice(0);
-      yelHold[0][1] = greHold[2][1].slice(0);
-
-      greHold[2] = oraHold[1].slice(0);
-      greHold[2][1] = whiHold[3][1].slice(0);
-
-      whiHold[3] = oraHold[3].slice(0);
-      whiHold[3][1] = blueHold[1][1].slice(0);
-
-      blueHold[1] = oraHold[2].slice(0);
-      blueHold[1][1] = held;
-      break;
+    case 82: rotateFace(redHold,-90, cHold[0]+= 90); break; //r
+    case 66: rotateFace(blueHold,-90,cHold[1]+= 90); break; //b
+    case 79: rotateFace(oraHold,-90, cHold[5]-= 90); break; //o
+    case 71: rotateFace(greHold, 90, cHold[3]-= 90); break; //g
+    case 89: rotateFace(yelHold, 90, cHold[2]+= 90); break; //y
+    case 87: rotateFace(whiHold,-90, cHold[4] -=90); break; //w
   }
   jQuery('.fullOrigin').css('webkitTransform', "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" );
   jQuery('.fullOrigin').css('Transform', "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" );
 }, false);
 
 function rotateFace(array,angle,centerAngle) {
-  held = array[0].slice(0);
+  var face = "";
+  var held = array[0].slice(0);
   array[0] = array[1].slice(0);
   array[1] = array[3].slice(0);
   array[3] = array[2].slice(0);
@@ -138,13 +43,67 @@ function rotateFace(array,angle,centerAngle) {
     }
     jQuery(array[k][0]).css('webkitTransform', "rotateX(" + array[k][2] + "deg) rotateY(" + array[k][3] + "deg) rotateZ(" + array[k][4] + "deg)");
   }
-  switch (array) {
-    case redHold: face = '.redFace'; break;
-    case blueHold: face = '.blueFace'; break;
-    case yelHold: face = '.yellowFace'; break;
-    case greHold: face = '.greenFace'; break;
-    case whiHold: face = '.whiteFace'; break;
-    case oraHold: face = '.orangeFace'; break;
+
+  switch(array) {
+    case redHold:
+      face = '.redFace';
+
+      held = yelHold[3].slice(0);
+      yelHold[3] = blueHold[2].slice(0,2).concat(array[0].slice(2));
+      blueHold[2] = whiHold[0].slice(0,2).concat(array[1].slice(2));
+      whiHold[0] = greHold[1].slice(0,2).concat(array[3].slice(2));
+      greHold[1] = held.slice(0,2).concat(array[2].slice(2));
+      break;
+
+    case blueHold:
+      face = '.blueFace';
+
+      held = yelHold[1].slice(0);
+      yelHold[1] = oraHold[2].slice(0,2).concat(array[0].slice(2));
+      oraHold[2] = whiHold[1].slice(0,2).concat(array[1].slice(2));
+      whiHold[1] = redHold[1].slice(0,2).concat(array[3].slice(2));
+      redHold[1] = held.slice(0,2).concat(array[2].slice(2));
+      break;
+
+    case oraHold:
+      face = '.orangeFace';
+
+      held = yelHold[0].slice(0);
+      yelHold[0] = greHold[2].slice(0,2).concat(array[0].slice(2));
+      greHold[2] = whiHold[3].slice(0,2).concat(array[1].slice(2));
+      whiHold[3] = blueHold[1].slice(0,2).concat(array[3].slice(2));
+      blueHold[1] = held.slice(0,2).concat(array[2].slice(2));
+      break;
+
+    case greHold:
+      face = '.greenFace';
+
+      held = yelHold[2].slice(0);
+      yelHold[2] = redHold[2].slice(0,2).concat(array[0].slice(2));
+      redHold[2] = whiHold[2].slice(0,2).concat(array[1].slice(2));
+      whiHold[2] = oraHold[1].slice(0,2).concat(array[3].slice(2));
+      oraHold[1]= held.slice(0,2).concat(array[2].slice(2));
+      break;
+
+    case yelHold:
+      face = '.yellowFace';
+
+      held = oraHold[0].slice(0);
+      oraHold[0] = blueHold[0].slice(0,2).concat(array[0].slice(2));
+      blueHold[0] = redHold[0].slice(0,2).concat(array[1].slice(2));
+      redHold[0] = greHold[0].slice(0,2).concat(array[3].slice(2));
+      greHold[0] = held.slice(0,2).concat(array[2].slice(2));
+      break;
+
+    case whiHold:
+      face = '.whiteFace';
+
+      held  = redHold[3].slice(0);
+      redHold[3] = blueHold[3].slice(0,2).concat(array[0].slice(2));
+      blueHold[3] = oraHold[3].slice(0,2).concat(array[1].slice(2));
+      oraHold[3] = greHold[3].slice(0,2).concat(array[3].slice(2));
+      greHold[3] = held.slice(0,2).concat(array[2].slice(2));
+      break;
   }
   jQuery(face + ' .C2 .two').css('webkitTransform', "rotateZ(" + centerAngle +"deg)");
 }
