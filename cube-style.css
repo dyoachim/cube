@@ -54,11 +54,11 @@
     .RY,.RB,.RW,.RG,.BO,.GO,.OW,.OY,.BY,.BW,.GY,.GW {-webkit-transform-origin: 100% 50% 80px;}
 
 
-    .yellowFace {-webkit-transform: translate3d(0,-80px,-40px) rotateX(90deg);}   
-    .orangeFace {-webkit-transform: translateZ(-120px);}   
-    .blueFace {-webkit-transform: translate3d(-100px,0,-20px) rotateY(-90deg);}   
-    .whiteFace {-webkit-transform: translate3d(0,160px,-40px) rotateX(90deg);}   
-    .greenFace {-webkit-transform: translate3d(140px,0,-20px) rotateY(-90deg);}   
+    .yellowFace {-webkit-transform: translate3d(0,-80px,-40px) rotateX(90deg);}
+    .orangeFace {-webkit-transform: translateZ(-120px);}
+    .blueFace {-webkit-transform: translate3d(-100px,0,-20px) rotateY(-90deg);}
+    .whiteFace {-webkit-transform: translate3d(0,160px,-40px) rotateX(90deg);}
+    .greenFace {-webkit-transform: translate3d(140px,0,-20px) rotateY(-90deg);}
     .redFace {-webkit-transform: translateZ(120px);}
 
 /* set the objects initially */

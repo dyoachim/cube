@@ -1,4 +1,4 @@
-var xAngle = 0, yAngle = 0, angle =0;
+var xAngle = 0, yAngle = 0;
 var cHold = [0,0,0,0,0,0];
 
 var RY = new cubePiece('.RY',0,  0,  0);
@@ -47,18 +47,17 @@ document.addEventListener('keydown', function(e)
     case 39: yAngle += 90; break; //right
     case 40: xAngle -= 90; break; //down
 
-    case 82: rotateFace(redHold,-90, cHold[0]+= 90); break; //r
-    case 66: rotateFace(blueHold,-90,cHold[1]+= 90); break; //b
-    case 79: rotateFace(oraHold,-90, cHold[5]-= 90); break; //o
-    case 71: rotateFace(greHold, 90, cHold[3]-= 90); break; //g
-    case 89: rotateFace(yelHold, 90, cHold[2]+= 90); break; //y
-    case 87: rotateFace(whiHold,-90, cHold[4] -=90); break; //w
+    case 82: rotateFace(redHold); break; //r
+    case 66: rotateFace(blueHold); break; //b
+    case 79: rotateFace(oraHold); break; //o
+    case 71: rotateFace(greHold); break; //g
+    case 89: rotateFace(yelHold); break; //y
+    case 87: rotateFace(whiHold); break; //w
   }
   $('.fullOrigin').css('webkitTransform', "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" );
-  $('.fullOrigin').css('Transform', "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" );
 }, false);
 
-function rotateFace(array,angle,centerAngle) {
+function rotateFace(array) {
   var face = "";
   var held = array[0];
   array[0] = array[1];
@@ -66,39 +65,44 @@ function rotateFace(array,angle,centerAngle) {
   array[3] = array[2];
   array[2] = held;
 
-
   array.forEach(function(entry) {
     switch (entry.getAxis(array)) {
-     case 'Z': entry.zDegree += angle; break;
-     case 'Y': entry.yDegree += angle; break;
-     case 'X': entry.xDegree += angle; break;
+     case 'Z': entry.zDegree += 90; break;
+     case 'Y': entry.yDegree += 90; break;
+     case 'X': entry.xDegree += 90; break;
     }
     $(entry.colorClass).css('webkitTransform', "rotateX(" + entry.xDegree + "deg) rotateY(" + entry.yDegree + "deg) rotateZ(" + entry.zDegree + "deg)");
   });
 
   switch(array) {
     case redHold:
-      rotateAdjacentFaces(yelHold,3, blueHold,2, whiHold,0, greHold,1);
+      rotateAdjacentFaces(yelHold,3, greHold,1, whiHold,0, blueHold,2);
+      centerAngle = cHold[0] -= 90
       face = '.redFace'; break;
 
     case blueHold:
-      rotateAdjacentFaces(yelHold,1, oraHold,2, whiHold,1, redHold,1);
+      centerAngle = cHold[1] -= 90
+      rotateAdjacentFaces(yelHold,1, redHold,1, whiHold,1, oraHold,2);
       face = '.blueFace'; break;
 
     case oraHold:
-      rotateAdjacentFaces(yelHold,0, greHold,2, whiHold,3, blueHold,1);
+      centerAngle = cHold[5] += 90
+      rotateAdjacentFaces(yelHold,0, blueHold,1, whiHold,3, greHold,2);
       face = '.orangeFace'; break;
 
     case greHold:
+      centerAngle = cHold[3] -= 90
       rotateAdjacentFaces(yelHold,2, redHold,2, whiHold,2, oraHold,1);
       face = '.greenFace'; break;
 
     case yelHold:
+      centerAngle = cHold[2] += 90
       rotateAdjacentFaces(oraHold,0, blueHold,0, redHold,0, greHold,0);
       face = '.yellowFace'; break;
 
     case whiHold:
-      rotateAdjacentFaces(redHold,3, blueHold,3, oraHold,3, greHold,3);
+      centerAngle = cHold[4] += 90
+      rotateAdjacentFaces(redHold,3, greHold,3, oraHold,3, blueHold,3);
       face = '.whiteFace'; break;
   }
   $(face + ' .C2 .two').css('webkitTransform', "rotateZ(" + centerAngle +"deg)");
