@@ -1,5 +1,5 @@
 var xAngle = 0, yAngle = 0;
-var cHold = [0,0,0,0,0,0];
+var rCenter = 0, yCenter = 0, gCenter = 0, bCenter = 0, wCenter = 0, oCenter = 0;
 
 var RY = new cubePiece('.RY',0,  0,  0);
 var RB = new cubePiece('.RB',0,  0, 90);
@@ -14,12 +14,12 @@ var BO = new cubePiece('.BO',0,180,-90);
 var BW = new cubePiece('.BW',0, 90,180);
 var OW = new cubePiece('.OW',0,180,180);
 
-var redHold  =[ RY, RG, RW, RB];
-var yelHold  =[ OY, GY, RY, BY];
-var greHold  =[ GY, GO, GW, RG];
-var blueHold =[ BY, RB, BW, BO];
-var whiHold  =[ OW, BW, RW, GW];
-var oraHold  =[ OY, BO, OW, GO];
+var redHold  =[ RY, RG, RW, RB, rCenter];
+var yelHold  =[ OY, GY, RY, BY, yCenter];
+var greHold  =[ GY, GO, GW, RG, gCenter];
+var blueHold =[ BY, RB, BW, BO, bCenter];
+var whiHold  =[ OW, BW, RW, GW, wCenter];
+var oraHold  =[ OY, BO, OW, GO, oCenter];
 
 function cubePiece(colorClass, xRotation, yRotation, zRotation ) {
   this.colorClass = colorClass;
@@ -65,49 +65,44 @@ function rotateFace(array) {
   array[1] = array[0];
   array[0] = held;
 
-  array.forEach(function(entry) {
-    switch (entry.getAxis(array)) {
-     case 'Z': entry.zDegree -= 90; break;
-     case 'Y': entry.yDegree -= 90; break;
-     case 'X': entry.xDegree -= 90; break;
+  array[4] += 90;
+
+  for (var i=0;i<=3;i++) {
+    switch (array[i].getAxis(array)) {
+     case 'Z': array[i].zDegree -= 90; break;
+     case 'Y': array[i].yDegree -= 90; break;
+     case 'X': array[i].xDegree -= 90; break;
     }
-    $(entry.colorClass).css('webkitTransform', "rotateX(" + entry.xDegree + "deg) rotateY(" + entry.yDegree + "deg) rotateZ(" + entry.zDegree + "deg)");
-  });
+    $(array[i].colorClass).css('webkitTransform', "rotateX(" + array[i].xDegree + "deg) rotateY(" + array[i].yDegree + "deg) rotateZ(" + array[i].zDegree + "deg)");
+  }
 
   switch(array) {
     case redHold:
       rotateAdjacentFaces(yelHold,2, greHold,3, whiHold,2, blueHold,1);
-      centerAngle = cHold[0] += 90;
       face = '.redFace'; break;
 
     case blueHold:
-      centerAngle = cHold[1] += 90;
       rotateAdjacentFaces(yelHold,3, redHold,3, whiHold,1, oraHold,1);
       face = '.blueFace'; break;
 
     case oraHold:
-      centerAngle = cHold[5] -= 90;
       rotateAdjacentFaces(yelHold,0, blueHold,3, whiHold,0, greHold,1);
       face = '.orangeFace'; break;
 
     case greHold:
-      centerAngle = cHold[3] -= 90;
       rotateAdjacentFaces(yelHold,1, oraHold,3, whiHold,3, redHold,1);
       face = '.greenFace'; break;
 
     case yelHold:
-      centerAngle = cHold[2] += 90;
       rotateAdjacentFaces(oraHold,0, greHold,0, redHold,0, blueHold,0);
       face = '.yellowFace'; break;
 
     case whiHold:
-      centerAngle = cHold[4] -= 90;
       rotateAdjacentFaces(oraHold,2, blueHold,2, redHold,2, greHold,2);
       face = '.whiteFace'; break;
   }
-  $(face + ' .C2 .two').css('webkitTransform', "rotateZ(" + centerAngle +"deg)");
+  $(face + ' .C2 .two').css('webkitTransform', "rotateZ(" + array[4] +"deg)");
 }
-
 
 function rotateAdjacentFaces(face0,position0, face1,position1, face2,position2, face3,position3) {
   held  = face3[position3];
@@ -116,15 +111,3 @@ function rotateAdjacentFaces(face0,position0, face1,position1, face2,position2, 
   face1[position1] = face0[position0];
   face0[position0] = held;
 }
-
-
-
-
-
-
-
-
-
-
-
-
