@@ -14,12 +14,12 @@ var BO = new cubePiece('.BO',0,180,-90);
 var BW = new cubePiece('.BW',0, 90,180);
 var OW = new cubePiece('.OW',0,180,180);
 
-var redHold  =[ RY, RB, RG, RW];
-var yelHold  =[ OY, BY, GY, RY];
-var greHold  =[ GY, RG, GO, GW];
-var blueHold =[ BY, BO, RB, BW];
-var whiHold  =[ RW, BW, GW, OW];
-var oraHold  =[ OY, GO, BO, OW];
+var redHold  =[ RY, RG, RW, RB];
+var yelHold  =[ OY, GY, RY, BY];
+var greHold  =[ GY, GO, GW, RG];
+var blueHold =[ BY, RB, BW, BO];
+var whiHold  =[ OW, BW, RW, GW];
+var oraHold  =[ OY, BO, OW, GO];
 
 function cubePiece(colorClass, xRotation, yRotation, zRotation ) {
   this.colorClass = colorClass;
@@ -59,50 +59,50 @@ document.addEventListener('keydown', function(e)
 
 function rotateFace(array) {
   var face = "";
-  var held = array[0];
-  array[0] = array[1];
-  array[1] = array[3];
+  var held = array[3];
   array[3] = array[2];
-  array[2] = held;
+  array[2] = array[1];
+  array[1] = array[0];
+  array[0] = held;
 
   array.forEach(function(entry) {
     switch (entry.getAxis(array)) {
-     case 'Z': entry.zDegree += 90; break;
-     case 'Y': entry.yDegree += 90; break;
-     case 'X': entry.xDegree += 90; break;
+     case 'Z': entry.zDegree -= 90; break;
+     case 'Y': entry.yDegree -= 90; break;
+     case 'X': entry.xDegree -= 90; break;
     }
     $(entry.colorClass).css('webkitTransform', "rotateX(" + entry.xDegree + "deg) rotateY(" + entry.yDegree + "deg) rotateZ(" + entry.zDegree + "deg)");
   });
 
   switch(array) {
     case redHold:
-      rotateAdjacentFaces(yelHold,3, greHold,1, whiHold,0, blueHold,2);
-      centerAngle = cHold[0] -= 90
+      rotateAdjacentFaces(yelHold,2, greHold,3, whiHold,2, blueHold,1);
+      centerAngle = cHold[0] += 90;
       face = '.redFace'; break;
 
     case blueHold:
-      centerAngle = cHold[1] -= 90
-      rotateAdjacentFaces(yelHold,1, redHold,1, whiHold,1, oraHold,2);
+      centerAngle = cHold[1] += 90;
+      rotateAdjacentFaces(yelHold,3, redHold,3, whiHold,1, oraHold,1);
       face = '.blueFace'; break;
 
     case oraHold:
-      centerAngle = cHold[5] += 90
-      rotateAdjacentFaces(yelHold,0, blueHold,1, whiHold,3, greHold,2);
+      centerAngle = cHold[5] -= 90;
+      rotateAdjacentFaces(yelHold,0, blueHold,3, whiHold,0, greHold,1);
       face = '.orangeFace'; break;
 
     case greHold:
-      centerAngle = cHold[3] -= 90
-      rotateAdjacentFaces(yelHold,2, redHold,2, whiHold,2, oraHold,1);
+      centerAngle = cHold[3] -= 90;
+      rotateAdjacentFaces(yelHold,1, oraHold,3, whiHold,3, redHold,1);
       face = '.greenFace'; break;
 
     case yelHold:
-      centerAngle = cHold[2] += 90
-      rotateAdjacentFaces(oraHold,0, blueHold,0, redHold,0, greHold,0);
+      centerAngle = cHold[2] += 90;
+      rotateAdjacentFaces(oraHold,0, greHold,0, redHold,0, blueHold,0);
       face = '.yellowFace'; break;
 
     case whiHold:
-      centerAngle = cHold[4] += 90
-      rotateAdjacentFaces(redHold,3, greHold,3, oraHold,3, blueHold,3);
+      centerAngle = cHold[4] -= 90;
+      rotateAdjacentFaces(oraHold,2, blueHold,2, redHold,2, greHold,2);
       face = '.whiteFace'; break;
   }
   $(face + ' .C2 .two').css('webkitTransform', "rotateZ(" + centerAngle +"deg)");
@@ -110,11 +110,11 @@ function rotateFace(array) {
 
 
 function rotateAdjacentFaces(face0,position0, face1,position1, face2,position2, face3,position3) {
-  held  = face0[position0];
-  face0[position0] = face1[position1];
-  face1[position1] = face2[position2];
-  face2[position2] = face3[position3];
-  face3[position3] = held;
+  held  = face3[position3];
+  face3[position3] = face2[position2];
+  face2[position2] = face1[position1];
+  face1[position1] = face0[position0];
+  face0[position0] = held;
 }
 
 
