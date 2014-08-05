@@ -55,6 +55,7 @@ document.addEventListener('keydown', function(e)
     case 87: rotateFace(whiHold); break; //w
   }
   $('.fullOrigin').css('webkitTransform', "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" );
+  $('.fullOrigin').css('-moz-transform', "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" );
 }, false);
 
 function rotateFace(array) {
@@ -74,6 +75,7 @@ function rotateFace(array) {
      case 'X': array[i].xDegree -= 90; break;
     }
     $(array[i].colorClass).css('webkitTransform', "rotateX(" + array[i].xDegree + "deg) rotateY(" + array[i].yDegree + "deg) rotateZ(" + array[i].zDegree + "deg)");
+    $(array[i].colorClass).css('-moz-transform', "rotateX(" + array[i].xDegree + "deg) rotateY(" + array[i].yDegree + "deg) rotateZ(" + array[i].zDegree + "deg)");
   }
 
   switch(array) {
@@ -102,6 +104,7 @@ function rotateFace(array) {
       face = '.whiteFace'; break;
   }
   $(face + ' .C2 .two').css('webkitTransform', "rotateZ(" + array[4] +"deg)");
+  $(face + ' .C2 .two').css('-moz-transform', "rotateZ(" + array[4] +"deg)");
 }
 
 function rotateAdjacentFaces(face0,position0, face1,position1, face2,position2, face3,position3) {
