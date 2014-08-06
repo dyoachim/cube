@@ -11,12 +11,12 @@
   margin: 0 auto;
 }
 
-.fullOrigin {
+#fullOrigin {
   height: 40px;
   width: 40px;
 }
 
-.origin, .C1, .face,.cubed {
+.origin, .face,.cubed {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
 

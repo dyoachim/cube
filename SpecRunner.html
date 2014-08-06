@@ -9,9 +9,6 @@
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
 
-  <script language="javascript" type="text/javascript" src="jquery-2.0.3.js"></script>
-
-
   <!-- include source files here... -->
   <script type="text/javascript" src="cube.js"></script>
 
@@ -56,5 +53,83 @@
 </head>
 
 <body>
+  <div class="renderContainer fullRender">
+    <div class="origin" id="fullOrigin">
+      <div class="face one"></div>
+      <div class="face two"></div>
+      <div class="face three"></div>
+      <div class="face four"></div>
+      <div class="face five"></div>
+      <div class="face six"></div>
+      <div class='container cubed'>
+        <div class="RY cubed" id='RY'>
+          <div class="face two red"></div>
+          <div class="face six yellow"></div>
+        </div>
+        <div class="RB cubed" id='RB'>
+          <div class="face two red"></div>
+          <div class="face six blue"></div>
+        </div>
+        <div class="RW cubed" id='RW'>
+          <div class="face two red"></div>
+          <div class="face six white"></div>
+        </div>
+        <div class="RG cubed" id='RG'>
+          <div class="face two red"></div>
+          <div class="face six green"></div>
+        </div>
+        <div class="GO cubed" id='GO'>
+          <div class="face two orange"></div>
+          <div class="face six green"></div>
+        </div>
+        <div class="BO cubed" id='BO'>
+          <div class="face two orange"></div>
+          <div class="face six blue"></div>
+        </div>
+        <div class="OW cubed" id='OW'>
+          <div class="face two orange"></div>
+          <div class="face six white"></div>
+        </div>
+        <div class="OY cubed" id='OY'>
+          <div class="face two orange"></div>
+          <div class="face six yellow"></div>
+        </div>
+        <div class="BY cubed" id='BY'>
+          <div class="face two blue"></div>
+          <div class="face six yellow"></div>
+        </div>
+        <div class="BW cubed" id='BW'>
+          <div class="face two blue"></div>
+          <div class="face six white"></div>
+        </div>
+        <div class="GY cubed" id='GY'>
+          <div class="face two green"></div>
+          <div class="face six yellow"></div>
+        </div>
+        <div class="GW cubed" id='GW'>
+          <div class="face two green"></div>
+          <div class="face six white"></div>
+        </div>
+      </div>
+      <div class="orangeFace">
+        <div class="face two orange" id='orangeFace'></div>
+      </div>
+      <div class="redFace">
+        <div class="face two red" id='redFace'></div>
+      </div>
+      <div class="blueFace">
+        <div class="face two blue" id='blueFace'></div>
+      </div>
+      <div class="whiteFace">
+        <div class="face two white" id='whiteFace'></div>
+      </div>
+      <div class="greenFace">
+        <div class="face two green" id='greenFace'></div>
+      </div>
+      <div class="yellowFace">
+        <div class="face two yellow" id='yellowFace'></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
